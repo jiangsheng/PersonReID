@@ -194,13 +194,13 @@ def face_drawer(frame,filterd_list):
         if obj.detected == True:
             if obj.det.type == "blacklist":
                 cv2.rectangle(frame,(x,h),(w,y),(0,0,255),2)
-                cv2.putText(frame,name,(x+1, h+1),font,1,(0,0,0),2)
+                cv2.putText(frame,name,(x+1, h+1),font,1,(0,0,0),1)
             elif obj.det.type == "vip":
                 cv2.rectangle(frame,(x,h),(w,y),(0,255,0),2)
-                cv2.putText(frame,name,(x+1, h+1),font,1,(0,0,0),2)
+                cv2.putText(frame,name,(x+1, h+1),font,1,(0,255,0),1)
         else:
             cv2.rectangle(frame,(x,h),(w,y),(0,0,0),3)
-            cv2.putText(frame,name,(x, h+5),font,1,(0,0,0),2)
+            cv2.putText(frame,name,(x, h+5),font,1,(0,0,0),1)
     return frame
             
 #calculating the cosine similiarity

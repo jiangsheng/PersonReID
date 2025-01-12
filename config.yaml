@@ -4,7 +4,7 @@ blacklist: D:\Programming\Python\AI\reid\centroids-reid\data\blacklist
 
 whitelist: D:\Programming\Python\AI\reid\centroids-reid\data\whitelist
 
-yolo_version: yolo_nas_s #assuming pretrained weights are coco
+yolo_version: yolo_nas_l #assuming pretrained weights are coco
 
 reid_checkpt: D:\programming\Python\AI\reid\centroids-reid\logs\market1501_resnet50_256_128_epoch_120.ckpt
 #reid_checkpt: D:\programming\Python\AI\reid\centroids-reid\logs\dukemtmcreid_resnet50_256_128_epoch_120.ckpt

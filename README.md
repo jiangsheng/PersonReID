@@ -23,15 +23,22 @@ The script is designed to be multithreaded. I have also created a switch-key. Pr
 
 2. ``` pip install -r requirements.txt ```
 
-3. Configure the path to your image queries via ``` config.yaml ```
+3. Configure the logs and blacklist/whitelist paths to your image queries via ``` config.yaml ``` and add a line 
 
-4. Download ``` market1501_resnet50_256_128_epoch_120.ckpt ``` and place it under ```/logs ``` as well as ``` resnet50-19c8e357.pth ``` and place it under ```models```
+reid: true
+
+to the end.
+
+
+4. Download ``` market1501_resnet50_256_128_epoch_120.ckpt ``` and place it under ```/logs ``` as well as ``` resnet50-19c8e357.pth ``` and place it under the ```models``` subfolder of the repository
 
 5. Place your blacklist and whitelist image queries under ``` /data ``` folder.
 
 6. Run ``` main.py ```
 There are mainly 3 files which I have created that made this possible
 ``` yolo_engine.py ``` , ``` reid_engine.py``` and ```main.py``` 
+
+If you see network errors downloading from sghub.deci.ai, it is because it is down. You can download the files manually or modify python3.8.20/dist-packages/super_gradients/training/pretrained_models.py and python3.8.20/dist-packages/super_gradients/training/utils/checkpoint_utils.py, see https://github.com/Deci-AI/super-gradients/issues/2057 for details. 
 
 ## Links to weights
 ResNet-50: https://download.pytorch.org/models/resnet50-19c8e357.pth

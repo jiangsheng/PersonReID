@@ -15,7 +15,7 @@ class ImageBreakDown:
 def yolo_detector(frame,yolo_model,conf = 0.25):
    # model = models.get(yolo_model, pretrained_weights= pretrained_weights).cuda() (call it once only via fusing model)
     prediction = yolo_model.predict(frame,conf=conf,fuse_model= False)
-    prediction_objs = list(prediction._images_prediction_lst)[0]
+    prediction_objs = prediction #list(prediction._images_prediction_lst)[0]
     bboxes = prediction_objs.prediction.bboxes_xyxy
     int_labels = prediction_objs.prediction.labels.astype(int)
     class_names = prediction_objs.class_names
@@ -32,11 +32,14 @@ def yolo_detector(frame,yolo_model,conf = 0.25):
         
    # print(len(all_cropped_images))
     return all_cropped_images
-
+import sys
+import super_gradients;
 def preprocess_det(image,name,type,yolo_model,conf = 0.25):
      # model = models.get(yolo_model, pretrained_weights= pretrained_weights).cuda() (call it once only via fusing model)
     prediction = yolo_model.predict(image,conf=conf,fuse_model= False)
-    prediction_objs = list(prediction._images_prediction_lst)[0]
+
+    #prediction_objs = list(prediction._images_prediction_lst)[0]
+    prediction_objs = prediction
     bboxes = prediction_objs.prediction.bboxes_xyxy
     int_labels = prediction_objs.prediction.labels.astype(int)
     class_names = prediction_objs.class_names

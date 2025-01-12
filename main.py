@@ -42,14 +42,17 @@ def preprocess(type,yolo_model,reid_model,file):
         image_indv = cropped_image[0].image
         indv_name = cropped_image[0].name
         val_loader = reid_engine.indv_image_transform(cfg,image_indv,indv_name,ImageIndv_dev)
-        a1,name = reid_engine._inference(reid_model,val_loader) # name is basically the same as what is iside Imagebreakdown
-        preprocessed_list.append(Combined_Indv(cropped_image[0],a1))
+        inferenceResult= reid_engine._inference(reid_model,val_loader) # name is basically the same as what is iside Imagebreakdown
+        if inferenceResult is not None:
+            a1,name =inferenceResult
+            preprocessed_list.append(Combined_Indv(cropped_image[0],a1))
         
     return preprocessed_list
 
 
 
 def video(yolo,reid):
+    cv2.namedWindow("ReID Threaded", cv2.WINDOW_NORMAL)
     video_feed = cv2.VideoCapture(config['video_feed'])
     yolo_model = prep_yolo_model(yolo)
     reid_model = prep_reid(reid)

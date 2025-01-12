@@ -154,14 +154,21 @@ def indv_image_transform(cfg,img,img_name,dclass):
 def _inference(model, batch, use_cuda=True, normalize_with_bn=True):
     model.cuda()
     model.eval()
+    assert batch is not None, "batch cannot be None"
     with torch.no_grad():
-        data, _, filename = batch
-        _, global_feat = model.backbone(
-            data.cuda() if use_cuda else data
-        )
-        if normalize_with_bn:
-            global_feat = model.bn(global_feat)
-        return global_feat, filename
+        try:
+            iterBatch = iter(batch)
+            data, _, filename = batch
+            backbone=model.backbone(
+                data.cuda() if use_cuda else data
+            )
+            _, global_feat = backbone
+            if normalize_with_bn:
+                global_feat = model.bn(global_feat)
+            return global_feat, filename
+        except TypeError as te:
+            print(batch, 'is not iterable')
+            return None
 
 def comparison(preprocessed_list,detect_reid_list,threshold=0.65):
     for detect_obj in detect_reid_list:
